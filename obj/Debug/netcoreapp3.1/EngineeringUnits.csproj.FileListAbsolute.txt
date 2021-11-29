@@ -1,0 +1,13 @@
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\EngineeringUnits.exe
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\EngineeringUnits.deps.json
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\EngineeringUnits.runtimeconfig.json
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\EngineeringUnits.runtimeconfig.dev.json
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\EngineeringUnits.dll
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\EngineeringUnits.pdb
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\obj\Debug\netcoreapp3.1\EngineeringUnits.csprojAssemblyReference.cache
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\obj\Debug\netcoreapp3.1\EngineeringUnits.AssemblyInfoInputs.cache
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\obj\Debug\netcoreapp3.1\EngineeringUnits.AssemblyInfo.cs
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\obj\Debug\netcoreapp3.1\EngineeringUnits.dll
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\obj\Debug\netcoreapp3.1\EngineeringUnits.pdb
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\janfr\source\repos\EngineeringUnits\EngineeringUnits\obj\Debug\netcoreapp3.1\EngineeringUnits.csproj.CopyComplete
