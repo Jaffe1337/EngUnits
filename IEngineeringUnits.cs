@@ -65,14 +65,22 @@ namespace EngineeringUnits
 		{
 			List<string> result = new List<string>();
 
-			switch (is_quantity) {
-				case true:
-					result = ListQuantity(entry);
-					break;
-				case false:
-					result = ListDimensions(entry);
-					break;
+			if (entry != null)
+			{
+				switch (is_quantity)
+				{
+					case true:
+						result = ListQuantity(entry);
+						break;
+					case false:
+						result = ListDimensions(entry);
+						break;
+				}
 			}
+			else {
+				result = ListAll(is_quantity);
+			}
+			
 
 			return result;
 		}
@@ -105,8 +113,8 @@ namespace EngineeringUnits
 
 			var units = Units.ReadJson();
 			List<string> dimensionClass = new List<string>();
-			bool key = true;
 
+			bool key = true;
 			foreach (var item in units["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
 			{
 				if (item["DimensionalClass"] != null && item["DimensionalClass"].ToString() == d_class)
@@ -123,13 +131,48 @@ namespace EngineeringUnits
 		}
 
 
-		private static List<string> ListClasses(string q_type)
-		{
+		private static bool checkList(List<string> type, string newEntry) {
 
-			List<string> classList = new List<string>();
+			bool value = true;
+			foreach (var entry in type) {
+				if (entry == newEntry)
+					value = false;
+			}
+			return value;
+		}
 
 
-			return classList;
+		private static List<string> ListAll(bool type) {				
+
+			var units = Units.ReadJson();
+			List<string> resultingList = new List<string>();
+
+			foreach (var item in units["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"]) {
+
+				switch (type) {
+					// DimensionClass
+					case true:
+
+						if (checkList(resultingList, item["DimensionClass"].ToString())) {
+							resultingList.Add(item["DimensionClass"].ToString());
+						}
+
+						break;
+
+					// QuantityType
+					case false:
+
+						foreach (var qType in item["QuantityType"]) {
+							if (checkList(resultingList, qType.ToString()))
+							{
+								resultingList.Add(qType.ToString());
+							}
+						}
+
+						break;
+				}	
+			}
+			return resultingList;
 		}
 	}
 }
