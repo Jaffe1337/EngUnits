@@ -8,7 +8,7 @@ namespace EngineeringUnits
 {
 	class Units
 	{
-		private static Newtonsoft.Json.Linq.JObject ReadJson(string v_unit) {
+		private static Newtonsoft.Json.Linq.JObject ReadJson() {
 
 			string json = "";
 
@@ -24,7 +24,7 @@ namespace EngineeringUnits
 
 		public static Newtonsoft.Json.Linq.JObject getObject(string v_unit) {
 
-			dynamic array = ReadJson(v_unit);
+			dynamic array = ReadJson();
 
 			foreach (var item in array["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
 			{
