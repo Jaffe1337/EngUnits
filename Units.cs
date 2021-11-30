@@ -34,6 +34,17 @@ namespace EngineeringUnits
 			return null;
 		}
 
+		public static List<string> ListDimesionalClass()
+		{
+			var units = Units.ReadJson();
+
+			foreach (var item in units["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
+			{
+				if (item["DimensionalClass"] != null)
+							Console.WriteLine(item["DimensionalClass"]);
+			}
+			return null;
+		}
 
 		static void Write(){ 
 		

@@ -12,8 +12,12 @@ namespace EngineeringUnits
 			// var a = Units.Read("bit");
 			// var b = Units.Read("kilobyte");
 			Console.WriteLine("Hello World!");
-			Console.WriteLine("{0}", a);
+			 Console.WriteLine("{0}", a);
 			// Console.WriteLine("{0}", b);
+
+
+			Units.ListDimesionalClass();
+			// Console.WriteLine("{0}", c);
 		}
 	}
 }
