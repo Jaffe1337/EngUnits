@@ -6,13 +6,15 @@ namespace EngineeringUnits
 {
 	class IEngineeringUnits
 	{
-		public static double Conversion(double x, string f_unit, string t_unit) {
+		public static double Conversion(double x, string f_unit, string t_unit)
+		{
 
 			// get unit objects
 			var fromUnitVar = Units.getObject(f_unit);
 			var toUnitVar = Units.getObject(t_unit);
 
-			if (fromUnitVar == null || toUnitVar == null) {
+			if (fromUnitVar == null || toUnitVar == null)
+			{
 				// Error, invalid object
 				return 0;
 			}
@@ -34,12 +36,14 @@ namespace EngineeringUnits
 			List<double> conversionUnits = new List<double>();
 
 			// get unit values
-			foreach (var unit in units) {
+			foreach (var unit in units)
+			{
 				if (unit["ConversionToBaseUnit"]["Factor"] != null)
 				{
 					conversionUnits.Add(Convert.ToDouble(unit["ConversionToBaseUnit"]["Factor"]));
 				}
-				else {
+				else
+				{
 					double numerator = Convert.ToDouble(unit["ConversionToBaseUnit"]["Fraction"]["Numerator"]);
 					double denominator = Convert.ToDouble(unit["ConversionToBaseUnit"]["Fraction"]["Denominator"]);
 					conversionUnits.Add(numerator / denominator);
@@ -48,13 +52,47 @@ namespace EngineeringUnits
 			return conversionUnits;
 		}
 
-		static void CreateUnits() { 
-		
+		static void CreateUnits()
+		{
+
 		}
 
-		static void ListModule() { 
-		
+		// List all uom fro a given quantity type
+		public static List<string> ListQuantityTypes(string q_type)
+		{
+
+			var units = Units.ReadJson();
+			List<string> quantityTypes = new List<string>();
+
+			foreach (var item in units["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
+			{
+				if (item["QuantityType"] != null)
+				{
+					foreach (var type in item["QuantityType"])
+					{
+						if (q_type == type.ToString())
+						{
+							Console.WriteLine(item["Name"]);
+							foreach(var uom in item["SameUnit"])
+								quantityTypes.Add(uom["_uom"].ToString());
+						}
+					}
+				}
+			}
+
+			return quantityTypes;
 		}
 
+
+		public static List<string> ListClasses(string q_type)
+		{
+
+			List<string> classList = new List<string>();
+
+
+
+
+			return classList;
+		}
 	}
 }

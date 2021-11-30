@@ -8,7 +8,7 @@ namespace EngineeringUnits
 {
 	class Units
 	{
-		private static Newtonsoft.Json.Linq.JObject ReadJson() {
+		public static Newtonsoft.Json.Linq.JObject ReadJson() {
 
 			string json = "";
 
