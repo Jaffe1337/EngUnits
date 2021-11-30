@@ -7,15 +7,18 @@ namespace EngineeringUnits
 	{
 		static void Main(string[] args)
 		{
-			// var a = IEngineeringUnits.Conversion(1, "kilobyte", "bit");
-			// Console.WriteLine("{0}", a);
+			/*
+			var a = IEngineeringUnits.Conversion(1, "kilobyte", "bit");
+			foreach (var item in a)
+				Console.WriteLine("{0}", item); */
 
 			Console.WriteLine("Hello World!");
 
-			var b = IEngineeringUnits.ListQuantityTypes("electric charge");
+			// "electric charge"
+			var b = IEngineeringUnits.ListModule(false, "1");
 
 			foreach (var item in b)				
-				Console.WriteLine("{0}", item);
+				Console.WriteLine("{0}", item); 
 		}
 	}
 }

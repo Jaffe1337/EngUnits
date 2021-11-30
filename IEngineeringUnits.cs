@@ -6,8 +6,10 @@ namespace EngineeringUnits
 {
 	class IEngineeringUnits
 	{
-		public static double Conversion(double x, string f_unit, string t_unit)
+		// (e)
+		public static List<string> Conversion(double x, string f_unit, string t_unit)
 		{
+			List<string> result = new List<string>();
 
 			// get unit objects
 			var fromUnitVar = Units.getObject(f_unit);
@@ -16,17 +18,22 @@ namespace EngineeringUnits
 			if (fromUnitVar == null || toUnitVar == null)
 			{
 				// Error, invalid object
-				return 0;
+				result.Add("Error: Invalid object");
+				return result;
 			}
-			/*
-			else if (fromUnitVar["ConversionToBaseUnit"]["_baseUnit"] != toUnitVar["ConversionToBaseUnit"]["_baseUnit"]) {
+			else if (fromUnitVar["ConversionToBaseUnit"]["_baseUnit"].ToString() != toUnitVar["ConversionToBaseUnit"]["_baseUnit"].ToString()) {
 				// Error, not of same unit of measurement
-				return 0;
-			} */
+				result.Add("Error: not of same unit of measurement");
+				return result;
+			} 
 
 			List<double> unitValues = Calculations(fromUnitVar, toUnitVar);
 
-			return (x * unitValues[0]) / unitValues[1];
+			result.Add(((x * unitValues[0]) / unitValues[1]).ToString());
+			result.Add(t_unit);
+			//result.Add(toUnitVar["_annotation"].ToString());
+
+			return result;
 
 		}
 
@@ -52,14 +59,26 @@ namespace EngineeringUnits
 			return conversionUnits;
 		}
 
-		static void CreateUnits()
-		{
 
+		// List all uom fro a given quantity type (d)
+		public static List<string> ListModule(bool is_quantity, string entry)
+		{
+			List<string> result = new List<string>();
+
+			switch (is_quantity) {
+				case true:
+					result = ListQuantity(entry);
+					break;
+				case false:
+					result = ListDimensions(entry);
+					break;
+			}
+
+			return result;
 		}
 
-		// List all uom fro a given quantity type
-		public static List<string> ListQuantityTypes(string q_type)
-		{
+
+		private static List<string> ListQuantity(string q_type) {
 
 			var units = Units.ReadJson();
 			List<string> quantityTypes = new List<string>();
@@ -72,9 +91,7 @@ namespace EngineeringUnits
 					{
 						if (q_type == type.ToString())
 						{
-							Console.WriteLine(item["Name"]);
-							foreach(var uom in item["SameUnit"])
-								quantityTypes.Add(uom["_uom"].ToString());
+							quantityTypes.Add(item["Name"].ToString());
 						}
 					}
 				}
@@ -84,12 +101,32 @@ namespace EngineeringUnits
 		}
 
 
-		public static List<string> ListClasses(string q_type)
+		private static List<string> ListDimensions(string d_class) {
+
+			var units = Units.ReadJson();
+			List<string> dimensionClass = new List<string>();
+			bool key = true;
+
+			foreach (var item in units["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
+			{
+				if (item["DimensionalClass"] != null && item["DimensionalClass"].ToString() == d_class)
+				{
+					key = false;
+					dimensionClass.Add(item["Name"].ToString());						
+				}
+			}
+
+			if (key)
+				dimensionClass.Add("Did not find any units of measurements consisting with your entry.");
+
+			return dimensionClass;
+		}
+
+
+		private static List<string> ListClasses(string q_type)
 		{
 
 			List<string> classList = new List<string>();
-
-
 
 
 			return classList;
