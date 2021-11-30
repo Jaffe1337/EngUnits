@@ -8,7 +8,7 @@ namespace EngineeringUnits
 {
 	class Units
 	{
-		public static Newtonsoft.Json.Linq.JObject Read(string v_unit) {
+		private static Newtonsoft.Json.Linq.JObject ReadJson(string v_unit) {
 
 			string json = "";
 
@@ -17,7 +17,15 @@ namespace EngineeringUnits
 				json = r.ReadToEnd();
 			}
 
-			dynamic array = JsonConvert.DeserializeObject(json);			
+			dynamic array = JsonConvert.DeserializeObject(json);
+			return array;
+		}
+
+
+		public static Newtonsoft.Json.Linq.JObject getObject(string v_unit) {
+
+			dynamic array = ReadJson(v_unit);
+
 			foreach (var item in array["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
 			{
 				if (item["Name"] == v_unit)
@@ -25,6 +33,7 @@ namespace EngineeringUnits
 			}
 			return null;
 		}
+
 
 		static void Write(){ 
 		
