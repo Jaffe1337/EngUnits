@@ -34,6 +34,24 @@ namespace EngineeringUnits
 			return null;
 		}
 
+		public static Newtonsoft.Json.Linq.JObject sortByQuantityType(string v_quantity)
+		{
+
+			dynamic array = ReadJson();
+
+			foreach (var item in array["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
+			{
+				if (item["QuantityType"] != null)
+					foreach (var quantityType in item["QuantityType"])
+                    {
+						if(v_quantity == quantityType.ToString())
+                        {
+							Console.WriteLine(item["Name"]);
+                        }
+                    }
+			}
+			return null;
+		}
 
 		static void Write(){ 
 		
