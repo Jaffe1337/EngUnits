@@ -91,6 +91,7 @@ namespace EngineeringUnits
 			var units = Units.ReadJson();
 			List<string> quantityTypes = new List<string>();
 
+			bool key = true;
 			foreach (var item in units["UnitOfMeasureDictionary"]["UnitsDefinition"]["UnitOfMeasure"])
 			{
 				if (item["QuantityType"] != null)
@@ -99,11 +100,15 @@ namespace EngineeringUnits
 					{
 						if (q_type == type.ToString())
 						{
+							key = false;
 							quantityTypes.Add(item["Name"].ToString());
 						}
 					}
 				}
 			}
+
+			if (key)
+				quantityTypes.Add("Did not find any units of measurements consisting with your entry.");
 
 			return quantityTypes;
 		}
@@ -153,19 +158,26 @@ namespace EngineeringUnits
 					// DimensionClass
 					case true:
 
-						if (checkList(resultingList, item["DimensionClass"].ToString())) {
-							resultingList.Add(item["DimensionClass"].ToString());
+						if (item["DimensionalClass"] != null)
+						{
+							if (checkList(resultingList, item["DimensionalClass"].ToString()))
+							{
+								resultingList.Add(item["DimensionalClass"].ToString());
+							}
 						}
 
 						break;
 
 					// QuantityType
 					case false:
-
-						foreach (var qType in item["QuantityType"]) {
-							if (checkList(resultingList, qType.ToString()))
+						if (item["QuantityType"] != null)
+						{
+							foreach (var qType in item["QuantityType"])
 							{
-								resultingList.Add(qType.ToString());
+								if (checkList(resultingList, qType.ToString()))
+								{
+									resultingList.Add(qType.ToString());
+								}
 							}
 						}
 

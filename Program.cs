@@ -14,8 +14,8 @@ namespace EngineeringUnits
 
 			Console.WriteLine("Hello World!");
 
-			// "electric charge"
-			var b = IEngineeringUnits.ListModule(false, "1");
+			// "electric charge", 1
+			var b = IEngineeringUnits.ListModule(true, " charge");
 
 			foreach (var item in b)				
 				Console.WriteLine("{0}", item); 
