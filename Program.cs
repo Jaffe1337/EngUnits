@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using EngineeringUnits;
 
 namespace EngineeringUnits
@@ -8,65 +9,30 @@ namespace EngineeringUnits
 	{
 		static void Main(string[] args)
 		{
-			/*
-			var a = IEngineeringUnits.Conversion(1, "kilobyte", "bit");
-			foreach (var item in a)
-				Console.WriteLine("{0}", item); */
-
 			Console.WriteLine("Hello World!");
 
-            SimpleListenerExample("http://10.225.149.178/");
 
-			// "electric charge", 1
-            /*
-			var b = IEngineeringUnits.ListModule(true, " charge");
+			var a = IEngineeringUnits.ListModule(false, null);
+			foreach (var item in a)
+				Console.WriteLine("{0}", item);
 
-			foreach (var item in b)				
-				Console.WriteLine("{0}", item); */
+			var b = IEngineeringUnits.ListModule(false, null);
+			foreach (var item in b)
+				Console.WriteLine("{0}", item);
+
+			var c = IEngineeringUnits.ListModule(true, "electric charge");
+			foreach (var item in c)				
+				Console.WriteLine("{0}", item);
+
+			var d = IEngineeringUnits.ListModule(true, "electric charge");
+			foreach (var item in d)
+				Console.WriteLine("{0}", item);
+
+			var e = IEngineeringUnits.Conversion(1, "kilobyte", "bit");
+			foreach (var item in e)
+				Console.WriteLine("{0}", item);
 		}
 
-
-        public static void SimpleListenerExample(string prefixes)
-        {
-            if (!HttpListener.IsSupported)
-            {
-                Console.WriteLine("Windows XP SP2 or Server 2003 is required to use the HttpListener class.");
-                return;
-            }
-            // URI prefixes are required,
-            // for example "http://contoso.com:8080/index/".
-            if (prefixes == null || prefixes.Length == 0)
-                throw new ArgumentException("prefixes");
-
-            // Create a listener.
-            HttpListener listener = new HttpListener();
-            // Add the prefixes.
-            /*
-            foreach (char s in prefixes)
-            {
-                listener.Prefixes.Add(s.ToString());
-            } */
-            listener.Prefixes.Add(prefixes);
-            listener.Start();
-            Console.WriteLine("Listening...");
-            // Note: The GetContext method blocks while waiting for a request.
-            HttpListenerContext context = listener.GetContext();
-            HttpListenerRequest request = context.Request;
-            // Obtain a response object.
-            HttpListenerResponse response = context.Response;
-            // Construct a response.
-            string responseString = "<HTML><BODY> Hello world!</BODY></HTML>";
-            byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
-            // Get a response stream and write the response to it.
-            response.ContentLength64 = buffer.Length;
-            System.IO.Stream output = response.OutputStream;
-            output.Write(buffer, 0, buffer.Length);
-            // You must close the output stream.
-            output.Close();
-            listener.Stop();
-        }
-
-
-
+        
     }
 }
